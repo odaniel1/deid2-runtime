@@ -1,4 +1,4 @@
-# R implement of the baselinse solution set out in:
+# R implement of the baseline solution set out in:
 # https://github.com/drivendataorg/deid2-runtime/tree/master/references
 
 # NOTE: This is currently a standalone .R file which creates a file
@@ -15,7 +15,7 @@ params <- fromJSON("./data/parameters.json")
 ## ---- (Pre-processing) Initialise empty histogram data structure ------------
 
 hist_bins <- crossing(
-  params$schema$periods %>% as_data_frame(),
+  params$schema$periods %>% as_tibble(),
   params$schema$neighborhood %>% as_data_frame() %>% select(neighborhood = code),
   params$schema$incident_type %>% as_data_frame() %>% select(incident_type = code)
 )
@@ -73,4 +73,4 @@ sub <- runs %>%
   # ensure the rows are ordered correctly for submission
   arrange(epsilon, neighborhood, year, month)
 
-write_csv(sub, "./data/submission.csv")
+write_csv(sub, "submission.csv")
